@@ -1,6 +1,3 @@
-"use client"
-
-import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
 
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
@@ -22,7 +19,7 @@ export const metdata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default function App({ Component, pageProps }) {
 
   //connect wallet
     // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
@@ -41,24 +38,17 @@ export default function RootLayout({ children }) {
 
 
   return (
-    <html>
-      <ConnectionProvider endpoint={endpoint}>
+    <div>
+    <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
-      <head>
-        <title>Chat with Llama 2</title>
-        <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦙</text></svg>"
-        />
-      </head>
-      <body>
-        {children}
-        <Analytics />
-      </body>
-      </WalletModalProvider>
+          <Component {...pageProps} />
+        </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
-    </html>
+  </div>
   );
 }
+
+
+
