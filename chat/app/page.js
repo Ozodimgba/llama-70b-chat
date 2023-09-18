@@ -7,6 +7,7 @@ import SlideOver from "./components/SlideOver";
 import EmptyState from "./components/EmptyState";
 import { Cog6ToothIcon, CodeBracketIcon } from "@heroicons/react/20/solid";
 import { useCompletion } from "ai/react";
+import { getCookies, setCookie, deleteCookie, getCookie } from 'cookies-next';
 
 function approximateTokenCount(text) {
   return Math.ceil(text.length * 0.4);
@@ -45,6 +46,9 @@ export default function HomePage() {
   const [temp, setTemp] = useState(0.75);
   const [topP, setTopP] = useState(0.9);
   const [maxTokens, setMaxTokens] = useState(800);
+
+  const paid = getCookies()
+  
 
   const { complete, completion, setInput, input } = useCompletion({
     api: "/api",

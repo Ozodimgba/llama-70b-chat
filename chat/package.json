@@ -14,6 +14,7 @@
     "@heroicons/react": "^2.0.18",
     "@vercel/analytics": "^1.0.1",
     "ai": "^2.2.12",
+    "cookies-next": "^4.0.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "next": "13.4.19",

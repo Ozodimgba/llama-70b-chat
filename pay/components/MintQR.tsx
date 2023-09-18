@@ -7,6 +7,7 @@ import {
   findReference,
   FindReferenceError,
 } from "@solana/pay";
+import { setCookie } from 'cookies-next';
 import { Keypair, PublicKey } from "@solana/web3.js";
 import { useConnection } from "@solana/wallet-adapter-react";
 import useToastHook from "@/hooks/useToastHook";
@@ -54,7 +55,7 @@ export default function MintQR() {
     // Create QR code encoded with Solana Pay URL
     const qr = createQR(
       solanaUrl, // The Solana Pay URL
-      512, // The size of the QR code
+      350, // The size of the QR code
       "transparent" // The background color of the QR code
     );
 
@@ -79,7 +80,7 @@ export default function MintQR() {
         mostRecentNotifiedTransaction.current = signatureInfo.signature;
         console.log(signatureInfo)
         // Toast notification
-        
+        setCookie('signature', signatureInfo, { maxAge: 60 * 6 * 24 });
         displayToast(signatureInfo.signature);
       } catch (e) {
         if (e instanceof FindReferenceError) {
